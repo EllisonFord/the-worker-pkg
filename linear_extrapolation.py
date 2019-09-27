@@ -23,7 +23,10 @@ def b_term(x, y, b) -> float:
 def least_squares_fit(x: list or tuple, y: list or tuple) -> (float, float):
     var_x = x_term(x, y)
     b = b_term(x, y, var_x)
-    print(f'Least Squares Eq.: y = {var_x}x + {b}')
+    sign = '+'
+    if b < 0:
+        sign = ''
+    print(f'Least Squares Eq.: y = {var_x}x {sign}{b}')
     return var_x, b
 
 
@@ -32,7 +35,7 @@ def main():
     x = [12, 30, 15, 24, 14, 18, 28, 26, 19, 27]
     y = (20, 60, 27, 50, 21, 30, 61, 54, 32, 57)
 
-    var, b = least_squares_fit(x, y)
+    var_x, b = least_squares_fit(x, y)
 
     plt.scatter(x, y)
     plt.show()
