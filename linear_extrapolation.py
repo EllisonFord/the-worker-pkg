@@ -16,7 +16,7 @@ def x_term(x: list or tuple, y: list or tuple) -> float:
     return numerator / denominator
 
 
-def b_term(x, y, b) -> float:
+def b_term(x: list or tuple, y: list or tuple, b: float) -> float:
     return (sum(y) - (b * sum(x))) / len(x)
 
 
@@ -33,11 +33,24 @@ def least_squares_fit(x: list or tuple, y: list or tuple) -> (float, float):
 def main():
 
     x = [12, 30, 15, 24, 14, 18, 28, 26, 19, 27]
-    y = (20, 60, 27, 50, 21, 30, 61, 54, 32, 57)
+    y = [20, 60, 27, 50, 21, 30, 61, 54, 32, 57]
 
     var_x, b = least_squares_fit(x, y)
 
+    y_samples, x_samples = [], []
+    max_sample = int(max(x+y)) + 2
+    min_sample = int(min(x+y)) - 2
+    num_samples = range(min_sample, max_sample)
+    for sample in num_samples:
+        eq_result = var_x * sample + b
+        if eq_result > max_sample:
+            break
+        y_samples.append(eq_result)
+        x_samples.append(sample)
+
     plt.scatter(x, y)
+
+    plt.plot(x_samples, y_samples, color='red', label='Linear Fit')
     plt.show()
 
 
